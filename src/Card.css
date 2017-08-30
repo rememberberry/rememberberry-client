@@ -1,0 +1,15 @@
+.Card {
+    text-align: center;
+}
+
+.ShowAnswerContainer {
+    text-align: center;
+}
+
+.ShowAnswerButton {
+  text-transform: uppercase;
+  margin-top: 10px;
+  font-size: 14px;
+  letter-spacing: 0px;
+  font-weight: 500;
+}

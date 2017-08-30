@@ -1,0 +1,18 @@
+body{
+    scroll-behavior: smooth;
+}
+
+.Chat {
+  max-width: 600px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.ChatTextBox {
+  text-align: center;
+  width: 100%;
+}
+
+.SendButton {
+  margin-left: 10px;
+}
