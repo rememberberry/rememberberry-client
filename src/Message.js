@@ -29,38 +29,13 @@ class Message extends Component {
       inner = content;
     }
 
-    var replies = this.props.msg.replies || [];
-    var replyButtons = replies.map((reply) => {
-      var label = null;
-      var msg = null;
-      if (typeof reply === 'string') { msg = reply; label = reply; }
-      else { msg = reply.msg; label = reply.label }
-
-      return (
-        <RaisedButton key={label}
-                      backgroundColor={reply.color || ''}
-                      className={"ReplyButton"}
-                      onClick={()=> this.props.send(msg)}>
-          {label}
-        </RaisedButton>
-      );
-    });
-
-    var isIncoming = this.props.msg.isIncoming;
-    var direction = isIncoming ? "Incoming" : "Outgoing";
+    var direction = this.props.msg.isIncoming ? "Incoming" : "Outgoing";
     return (
       <div>
         <div className={"BubbleOuter " + direction}>
           <div className={"Bubble MessageBubble " + direction}>
             { inner }
           </div>
-        </div>
-        <div className="ReplyBubbleOuter">
-          { this.props.isLastMessage && isIncoming && replyButtons.length > 0 ? 
-            <div className="Bubble ReplyButtonsBubble">
-              { replyButtons }
-            </div> : null
-          }
         </div>
       </div>
     );

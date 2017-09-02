@@ -16,3 +16,38 @@ body{
 .SendButton {
   margin-left: 10px;
 }
+
+.ReplyBubbleOuter {
+  text-align: center
+}
+
+.ReplyButtonsBubble {
+  padding: 2px;
+  display: inline-block;
+  max-width: 450px;
+  margin-top: 15px
+}
+
+.ReplyButton {
+  text-transform: uppercase;
+  margin: 10px;
+  font-size: 14px;
+  letter-spacing: 0px;
+  font-weight: 500;
+}
+
+.ReplyButton.red {
+  background-color: lightred;
+}
+
+.ReplyButton.yellow {
+  background-color: lightyellow;
+}
+
+.ReplyButton.blue {
+  background-color: lightblue;
+}
+
+.ReplyButton.green {
+  background-color: lightgreen;
+}

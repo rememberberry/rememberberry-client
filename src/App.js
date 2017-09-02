@@ -117,6 +117,39 @@ class App extends Component {
                  key={i} />);
     };
 
+    var lastMessage = this.state.messages[this.state.messages.length-1];
+    var replies = null;
+    var responseType = "text";
+    if (lastMessage && lastMessage.isIncoming) {
+      responseType = lastMessage.response_type || "text";
+      var enumerate = lastMessage.enumerate === undefined ?  true : lastMessage.enumerate;
+      if (enumerate) this.enumerate = [];
+      var replyButtons = (lastMessage.replies || []).map((reply, i) => {
+        var label = null;
+        var msg = null;
+        if (typeof reply === 'string') { msg = reply; label = reply; }
+        else { msg = reply.msg; label = reply.label }
+        if (enumerate) this.enumerate.push(msg);
+
+        label = (i+1) + ': ' + label;
+        return (
+          <RaisedButton key={label}
+                        backgroundColor={reply.color || ''}
+                        className={"ReplyButton"}
+                        onClick={()=> send(msg)}>
+            {label}
+          </RaisedButton>
+        );
+      });
+
+      replies = <div className="ReplyBubbleOuter">
+        <div className="Bubble ReplyButtonsBubble">
+          { replyButtons }
+        </div>
+      </div>
+
+    }
+
     return (
       <MuiThemeProvider>
         <div className="App">
@@ -124,6 +157,7 @@ class App extends Component {
                      send={send} />
           <div className="Chat">
               { messages }
+              { replies }
               <div className="ChatTextBox">
                 <TextField value={this.state.text}
                            onChange={this.handleChange}
