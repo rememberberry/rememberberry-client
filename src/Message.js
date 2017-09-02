@@ -17,6 +17,8 @@ class Message extends Component {
   }
 
   render() {
+    if (this.props.msg.silent) return <div></div>;
+
     var content = this.props.msg.content;
     var inner = null;
     if (content instanceof Object) {

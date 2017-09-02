@@ -72,10 +72,23 @@ class App extends Component {
   }
 
   handleSend(event) {
-    if (this.state.text !== '') {
-      this.state.ws.send(this.state.text);
+    var msg = this.state.text;
+    var num = parseInt(msg);
+    if (this.enumerate && !isNaN(num) && num >= 1 && num <= this.enumerate.length) {
+      msg = this.enumerate[num-1];
+      this.enumerate = null;
+    }
+
+    var lastMessage = this.state.messages[this.state.messages.length-1];
+    var silent = false;
+    if (lastMessage) {
+      silent = lastMessage.silent_response;
+    }
+
+    if (msg !== '') {
+      this.state.ws.send(msg);
       let prevMessages = this.state.messages.slice();
-      prevMessages.push({'isIncoming': false, 'content': this.state.text});
+      prevMessages.push({'isIncoming': false, 'content': msg, silent: silent});
       this.setState({text: '', messages: prevMessages});
     }
   }
@@ -159,7 +172,8 @@ class App extends Component {
               { messages }
               { replies }
               <div className="ChatTextBox">
-                <TextField value={this.state.text}
+                <TextField type={responseType}
+                           value={this.state.text}
                            onChange={this.handleChange}
                            onKeyDown={this.handleKeyDown}/>
                 <RaisedButton className="SendButton" onClick={this.handleSend}>Send</RaisedButton>
