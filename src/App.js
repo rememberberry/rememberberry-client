@@ -35,7 +35,7 @@ class App extends Component {
       this.resetState();
     }
 
-    const ws = new WebSocket("ws://localhost:80/messages");
+    const ws = new WebSocket("ws://"+location.host+"/messages");
     ws.onopen = (event) => {
       this.setState({ws: ws, connected: true});
       var auth_token = localStorage.getItem('auth_token');
