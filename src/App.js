@@ -35,7 +35,7 @@ class App extends Component {
       this.resetState();
     }
 
-    const ws = new WebSocket("ws://"+window.location.host+"/messages");
+    const ws = new WebSocket("wss://bot.rememberberry.com/");
     ws.onopen = (event) => {
       this.setState({ws: ws, connected: true});
       var auth_token = localStorage.getItem('auth_token');
